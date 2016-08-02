@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="rpc-background-location" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>RPCBackgroundLocation</name>
+    <js-module name="RPCBackgroundLocation" src="www/RPCBackgroundLocation.js">
+        <clobbers target="cordova.plugins.RPCBackgroundLocation" />
+    </js-module>
+</plugin>
