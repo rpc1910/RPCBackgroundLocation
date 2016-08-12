@@ -4,4 +4,41 @@
     <js-module name="RPCBackgroundLocation" src="www/RPCBackgroundLocation.js">
         <clobbers target="cordova.plugins.RPCBackgroundLocation" />
     </js-module>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="RPCBackgroundLocation">
+                <param name="android-package" value="br.com.rodrigop.RPCBackgroundLocation" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        	<service android:name="br.com.rodrigop.RPCBackgroundLocation.RPCBackgroundLocationService" android:label="RPCBackgroundLocationService" android:exported="false">
+	            <intent-filter>
+	                <category android:name="android.intent.category.DEFAULT" />
+	                <action android:name="SERVICO_LOCATION" />
+	            </intent-filter>
+	        </service>
+
+	        <receiver android:name="br.com.rodrigop.RPCBackgroundLocation.RPCBackgroundLocationBroadcast"
+	            android:label="RPCBackgroundLocationBroadcast"
+	            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+	            <intent-filter>
+	                <action android:name="android.intent.action.BOOT_COMPLETED" />
+	            </intent-filter>
+	        </receiver>
+    	</config-file>
+
+    	<config-file target="AndroidManifest.xml" parent="/manifest">
+        	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    	</config-file>
+
+    	<source-file src="src/android/RPCBackgroundLocation.java" target-dir="src/br/com/rodrigop/RPCBackgroundLocation/" />
+        <source-file src="src/android/RPCBackgroundLocationService.java" target-dir="src/br/com/rodrigop/RPCBackgroundLocation/" />
+    	<source-file src="src/android/RPCBackgroundLocationBroadcast.java" target-dir="src/br/com/rodrigop/RPCBackgroundLocation/" />
+    </platform>
 </plugin>
